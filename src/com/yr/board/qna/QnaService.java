@@ -89,15 +89,6 @@ public class QnaService implements Action {
 		
 		if(method.equals("POST")) {
 			String saveDirectory = request.getServletContext().getRealPath("upload");
-			
-			File file = new File(saveDirectory);
-			
-			if(!file.exists()) {
-				file.mkdirs();
-			}
-			
-			
-			
 			int maxPostSize = 1024*1024*100;
 			Connection con=null;
 
@@ -120,6 +111,7 @@ public class QnaService implements Action {
 				qnaDTO.setWriter(multipartRequest.getParameter("writer"));
 				qnaDTO.setContents(multipartRequest.getParameter("contents"));
 				con = DBConnector.getConnect();
+				
 				
 				//1. 시퀀스번호 가져오기
 				int num = qnaDAO.getNum();
@@ -155,12 +147,10 @@ public class QnaService implements Action {
 					e.printStackTrace();
 				}
 			}
-	
 			actionForward.setCheck(false);
-			actionForward.setPath("./boardList");
+			actionForward.setPath("./qnaList");
 			
 		}
-		
 		request.setAttribute("board", "qna");
 		actionForward.setCheck(check);
 		actionForward.setPath(path);

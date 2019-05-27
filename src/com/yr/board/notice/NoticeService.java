@@ -16,6 +16,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.yr.action.Action;
 import com.yr.action.ActionForward;
 import com.yr.board.BoardDTO;
+import com.yr.board.notice.NoticeDTO;
 import com.yr.page.SearchMakePage;
 import com.yr.page.SearchPager;
 import com.yr.page.SearchRow;
@@ -89,8 +90,9 @@ public class NoticeService implements Action {
 
 	@Override
 	public ActionForward select(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		return null;
+		ActionForward actionForward = new ActionForward();
+		return actionForward;
+	
 	}
 
 	@Override

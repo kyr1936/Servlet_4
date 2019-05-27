@@ -15,8 +15,17 @@ public class QnaDAO implements BoardDAO{
 
 	@Override
 	public int getNum() throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		int result=0;
+		Connection con = DBConnector.getConnect();
+		String sql = "select qna_seq.nextval from dual";		
+		PreparedStatement st = con.prepareStatement(sql);
+		ResultSet rs = st.executeQuery();
+		rs.next();
+		result=rs.getInt(1);
+		
+		st.close();
+		rs.close();
+		return result;
 	}
 
 	@Override

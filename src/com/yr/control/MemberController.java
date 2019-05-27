@@ -10,26 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.yr.action.ActionForward;
-import com.yr.board.notice.NoticeService;
+import com.yr.member.MemberService;
 
 /**
- * Servlet implementation class NoticeController
+ * Servlet implementation class MemberController
  */
-@WebServlet("/NoticeController")
-public class NoticeController extends HttpServlet {
+@WebServlet("/MemberController")
+public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private NoticeService noticeService;
-	
-
-	
-	
+    private MemberService memberService;
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeController() {
-    	
+    public MemberController() {
         super();
-        noticeService = new NoticeService();
+        memberService = new MemberService();
         // TODO Auto-generated constructor stub
     }
 
@@ -39,27 +34,9 @@ public class NoticeController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String command = request.getPathInfo();
 		ActionForward actionForward = null;
-		System.out.println("command : " + command);
-		if(command.equals("/noticeList")) {
-			actionForward = noticeService.list(request, response);
-			
-		} else if(command.equals("/noticeSelect")) {
-			actionForward = noticeService.select(request, response);
-			
-		} else if(command.equals("/noticeWrite")) {
-			actionForward=noticeService.insert(request, response);
-			
-		} else if(command.equals("/noticeUpdate")) {
-			actionForward = noticeService.update(request, response);
-			
-		} else if(command.equals("/noticeDelete")) {
-			actionForward = noticeService.delete(request, response);
+		if(command.equals("/idCheck")) {
+			actionForward = memberService.idCheck(request, response);
 		}
-		
-		
-		
-		
-		
 		if(actionForward.isCheck()) {
 			RequestDispatcher view = request.getRequestDispatcher(actionForward.getPath());
 			view.forward(request, response);

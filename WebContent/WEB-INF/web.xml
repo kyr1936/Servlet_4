@@ -17,12 +17,20 @@
     <url-pattern>/index.do</url-pattern>
   </servlet-mapping>
   <servlet>
-  	<servlet-name>qna</servlet-name>
-  	<servlet-class>com.yr.control.QnaController</servlet-class>
+    <servlet-name>qna</servlet-name>
+    <servlet-class>com.yr.control.QnaController</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>qna</servlet-name>
-  	<url-pattern>/qna/*</url-pattern>
+    <servlet-name>qna</servlet-name>
+    <url-pattern>/qna/*</url-pattern>
   </servlet-mapping>
-
+  <servlet>
+  	<servlet-name>member</servlet-name>
+  	<servlet-class>com.yr.cotrol.MembercController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>member</servlet-name>
+  	<url-pattern>/member/*</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

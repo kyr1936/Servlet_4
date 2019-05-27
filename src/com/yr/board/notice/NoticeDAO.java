@@ -8,14 +8,25 @@ import java.util.List;
 
 import com.yr.board.BoardDAO;
 import com.yr.board.BoardDTO;
+import com.yr.notice.NoticeDTO;
 import com.yr.page.SearchRow;
+import com.yr.util.DBConnector;
 
 public class NoticeDAO implements BoardDAO{
 
 	@Override
 	public int getNum() throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		int result=0;
+		Connection con = DBConnector.getConnect();
+		String sql = "select notice_seq.nextval from dual";		
+		PreparedStatement st = con.prepareStatement(sql);
+		ResultSet rs = st.executeQuery();
+		rs.next();
+		result=rs.getInt(1);
+
+		st.close();
+		rs.close();
+		return result;
 	}
 
 	@Override
@@ -26,8 +37,26 @@ public class NoticeDAO implements BoardDAO{
 
 	@Override
 	public BoardDTO selectOne(int num, Connection con) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		NoticeDTO noticeDTO= null;
+		
+		String sql ="select * from notice where num=?";
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setInt(1, num);
+		ResultSet rs = st.executeQuery();
+		if(rs.next()) {
+			noticeDTO = new NoticeDTO();
+			noticeDTO.setNum(rs.getInt("num"));
+			noticeDTO.setTitle(rs.getString("title"));
+			noticeDTO.setContents(rs.getString("contents"));
+			noticeDTO.setWriter(rs.getString("writer"));
+			noticeDTO.setReg_date(rs.getDate("reg_date"));
+			noticeDTO.setHit(rs.getInt("hit"));
+		}
+		
+		rs.close();
+		st.close();
+		
+		return noticeDTO;
 	}
 
 	@Override
